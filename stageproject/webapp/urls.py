@@ -16,6 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+
 urlpatterns = [
-    path('', views.index()),
+    path('', views.index),
+    path('index', views.index),
+    path('register', views.register),
+    path('urunekle', views.image_upload_view),
+    path('login', views.Login),
+    path('urunler/<slug:slug>', views.index, name='details'),
+    path('urunler/', views.index),
+    path('upload', views.image_upload_view),
+
 ]
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

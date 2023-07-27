@@ -1,18 +1,17 @@
-<html lang="tr">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'index.css'%}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-
 <body>
-
-
-
-
+    {%if user.is_authenticated%}
+    <a href="/urunekle">ürün ekle</a>
+    {%else%}
+    <a href="/login">giriş</a>
+    <a href="kayıt">kayıt ol</a>
+    {%endif%}
+    
 
 </body>
-
 </html>
