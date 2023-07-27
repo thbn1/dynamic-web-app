@@ -1,0 +1,20 @@
+.prdbtn{
+
+
+    text-align: center;
+    border-radius: 7px;
+    height:55px;
+    width: 55px;
+    border-style: dashed;
+    
+}
+.prdimg {
+    
+    border:0px solid transparent;
+    border-radius: 7px;
+    width: auto;
+    height: auto;
+    width: 49px;
+    height:49px;
+  }
+

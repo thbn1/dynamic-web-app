@@ -2,7 +2,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"
+    {% load static %}
+    <link href="{% static '/index.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
@@ -27,38 +29,49 @@
                             <option value="ev aletleri">Ev Aletleri</option>
                           </select><br><br>
                     <label for="id_image">Resim:</label><br>
-                    <button type="button" style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Görselleri Seç</button>
-                    <input type='file' id="getFile" accept="image/*" required id="id_image" id="getFile" style="display:none" name="images" multiple><br><br>
-
-                    <div id="imgs">
-                        
-                        <script>getFile.onchange = evt => {
-                            document.getElementById("imgs").innerHTML="";
-                            const files=event.target.files;
-                            var i=0;
-                            for (let index of files) {
-                                i++;
-
-                                
-                                document.getElementById("imgs").innerHTML += `<img onclick="deletefunc(this)" name="${i}" src="${URL.createObjectURL(index)}" style="width: 100px;" >`;
+       
+                     <div class="prdbtn" type="button" id="imgbt1" onclick="document.getElementById('getFile1').click()" style="display:inline !important" ><img  id="prdimg1" class="prdimg" ></div>
+                     <div class="prdbtn" type="button" id="imgbt2" style="display:none" onclick="document.getElementById('getFile2').click()" ><img id="prdimg2"  class="prdimg" ></div>
+                     <div class="prdbtn" type="button" id="imgbt3" style="display:none" onclick="document.getElementById('getFile3').click()" ><img id="prdimg3"  class="prdimg" ></div>
+                     <div class="prdbtn" type="button" id="imgbt4" style="display:none" onclick="document.getElementById('getFile4').click()" ><img id="prdimg4"  class="prdimg" ></div>
+                     <div class="prdbtn" type="button" id="imgbt5" style="display:none" onclick="document.getElementById('getFile5').click()" ><img id="prdimg5"  class="prdimg" ></div>
+                
+                    <input type='file' id="getFile1" onchange="imagechange(this)" accept="image/*" required id="id_image" id="getFile"  name="images1" hidden>
+                    <input type='file' id="getFile2" onchange="imagechange(this)" accept="image/*" required id="id_image" id="getFile"  name="images2" hidden>
+                    <input type='file' id="getFile3" onchange="imagechange(this)" accept="image/*" required id="id_image" id="getFile"  name="images3" hidden>
+                    <input type='file' id="getFile4" onchange="imagechange(this)" accept="image/*" required id="id_image" id="getFile"  name="images4" hidden>
+                    <input type='file' id="getFile5" onchange="imagechange(this)" accept="image/*" required id="id_image" id="getFile"  name="images5" hidden><br><br>
+                          
+ 
+                        <script>
+                            function imagechange(elem){
+                                const files=elem.files
+                                if (files.length>0){ 
+                                    var idd= parseInt(elem.id.slice(-1))+1
+                                    document.getElementById("prdimg"+String(idd-1)).src
+                                    =URL.createObjectURL(files[0])
+                                    if (idd!==6){
                                
-                            };};
-                            function deletefunc(elem){
-                                elem.remove();
-                              
+                                    document.getElementById("imgbt"+String(idd)).style="display:inline !important"
+                                  
+                                }
+                                }
                             }
+                            
+                        
+
                         </script>
-                    </div>
+         
                     <button name="submit" type="submit">Yükle</button>
               </form>
               
-              {% if img_obj %}
-                <h3>Succesfully uploaded : {{img_obj.title}}</h3>
-                <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
-              {% endif %}
+          
               
         </div>
-
+        {% if img_obj %}
+        <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+        <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+      {% endif %}
         <div class="h-50 d-flex align-items-center justify-content-center">
             {{data}}
             <hr>
